@@ -2,7 +2,8 @@
 
 Minimalistic but perfect custom scrollbar plugin
 
-[![Travis CI](https://travis-ci.org/noraesae/perfect-scrollbar.svg?branch=master)](https://travis-ci.org/noraesae/perfect-scrollbar)
+`next`  
+[![Travis CI](https://travis-ci.org/noraesae/perfect-scrollbar.svg?branch=next)](https://travis-ci.org/noraesae/perfect-scrollbar)
 
 #### v1.0 is under construction here. If you'd like to help, [please!](https://github.com/noraesae/perfect-scrollbar/milestone/1)
 

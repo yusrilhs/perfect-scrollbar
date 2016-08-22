@@ -26,8 +26,19 @@
     "node": ">= 4"
   },
   "scripts": {
-    "test": "echo 'no test yet' && exit 1",
+    "test": "karma start build/karma.conf.js",
     "before-deploy": "echo 'no deploy yet' && exit 1"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "jasmine-core": "^2.4.1",
+    "karma": "^1.2.0",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-firefox-launcher": "^1.0.0",
+    "karma-html2js-preprocessor": "^1.0.0",
+    "karma-jasmine": "^1.0.2",
+    "karma-sourcemap-loader": "^0.3.7",
+    "karma-webpack": "^1.8.0",
+    "webpack": "^1.13.2"
+  }
 }

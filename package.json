@@ -26,11 +26,16 @@
     "node": ">= 4"
   },
   "scripts": {
-    "test": "karma start build/karma.conf.js",
+    "test": "npm run lint && npm run test:unit",
+    "test:unit": "karma start build/karma.conf.js",
+    "lint": "eslint **/*.js",
     "before-deploy": "echo 'no deploy yet' && exit 1"
   },
   "license": "MIT",
   "devDependencies": {
+    "eslint": "^3.3.1",
+    "eslint-config-airbnb-base": "^5.0.3",
+    "eslint-plugin-import": "^1.14.0",
     "jasmine-core": "^2.4.1",
     "karma": "^1.2.0",
     "karma-chrome-launcher": "^2.0.0",

@@ -18,7 +18,7 @@ module.exports = config => {
     concurrency: Infinity,
     webpack: {
       resolve: { alias },
-      devtool: 'inline-source-map'
+      devtool: 'inline-source-map',
     },
     webpackMiddleware: {
       noInfo: true,

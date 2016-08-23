@@ -3,7 +3,6 @@ const ps = require('ps');
 const loadFixture = require('./helpers/load-fixture');
 
 describe('test', () => {
-
   it('test', () => {
     expect(ps()).toBe('ps');
   });
@@ -12,5 +11,4 @@ describe('test', () => {
     loadFixture('test');
     expect($('#test').clientWidth).toBe(100);
   });
-
 });

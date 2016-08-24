@@ -1,7 +1,4 @@
-const alias = require('./alias');
-
 module.exports = {
-  resolve: { alias },
   devtool: '#eval-source-map',
   module: {
     preLoaders: [

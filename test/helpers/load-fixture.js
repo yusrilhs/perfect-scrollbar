@@ -1,9 +1,12 @@
 import { basename } from 'path';
 
-const fixtures = Object.keys(__html__).reduce((result, fixturePath) => {
-  result[basename(fixturePath, '.html')] = __html__[fixturePath];
-  return result;
-}, {});
+// eslint-disable-next-line no-underscore-dangle
+const htmls = window.__html__;
+
+const fixtures = Object.keys(htmls)
+  .reduce((result, fixturePath) =>
+    Object.assign(result, { [basename(fixturePath, '.html')]: htmls[fixturePath] })
+  , {});
 
 export default function loadFixture(name) {
   const fixture = fixtures[name];
@@ -11,4 +14,4 @@ export default function loadFixture(name) {
     throw new Error('no fixture named', name);
   }
   document.body.innerHTML = fixtures[name];
-};
+}

@@ -1,4 +1,4 @@
-const alias = require('./alias');
+const webpack = require('./webpack.conf');
 
 module.exports = config => {
   config.set({
@@ -16,10 +16,7 @@ module.exports = config => {
     browsers: ['Chrome', 'Firefox'],
     singleRun: true,
     concurrency: Infinity,
-    webpack: {
-      resolve: { alias },
-      devtool: 'inline-source-map',
-    },
+    webpack,
     webpackMiddleware: {
       noInfo: true,
     },

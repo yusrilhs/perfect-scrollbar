@@ -28,7 +28,7 @@
   "scripts": {
     "test": "npm run lint && npm run test:unit",
     "test:unit": "karma start build/karma.conf.js",
-    "lint": "eslint **/*.js",
+    "lint": "eslint .",
     "before-deploy": "echo 'no deploy yet' && exit 1"
   },
   "license": "MIT",

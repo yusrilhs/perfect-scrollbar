@@ -1,6 +1,6 @@
-const $ = require('./helpers/query-selector');
-const ps = require('ps');
-const loadFixture = require('./helpers/load-fixture');
+import ps from 'ps';
+import $ from './helpers/query-selector';
+import loadFixture from './helpers/load-fixture';
 
 describe('test', () => {
   it('test', () => {

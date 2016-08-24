@@ -1,3 +1,3 @@
-module.exports = function ps() {
+export default function ps() {
   return 'ps';
-};
+}

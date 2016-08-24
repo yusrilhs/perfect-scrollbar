@@ -4,6 +4,13 @@ module.exports = {
   resolve: { alias },
   devtool: '#eval-source-map',
   module: {
+    preLoaders: [
+      {
+        test: /\.js$/,
+        exclude: /(node_modules|bower_components)/,
+        loader: 'eslint',
+      },
+    ],
     loaders: [
       {
         test: /\.js$/,
@@ -14,5 +21,9 @@ module.exports = {
         },
       },
     ],
+  },
+  eslint: {
+    emitError: true,
+    failOnError: true,
   },
 };

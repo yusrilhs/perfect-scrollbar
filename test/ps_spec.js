@@ -5,7 +5,7 @@ import F from './helpers/fixture';
 
 describe('ps', () => {
   describe('initialize', () => {
-    beforeEach(() => F.load('index'));
+    beforeEach(() => F.load('ps_spec'));
     afterEach(() => F.unload());
 
     it('parameters', () => {

@@ -8,7 +8,7 @@ const fixtures = Object.keys(htmls)
     Object.assign(result, { [basename(fixturePath, '.html')]: htmls[fixturePath] })
   , {});
 
-export function load(name) {
+function load(name) {
   const fixture = fixtures[name];
   if (!fixture) {
     throw new Error('no fixture named', name);
@@ -16,6 +16,8 @@ export function load(name) {
   document.body.innerHTML = fixtures[name];
 }
 
-export function unload() {
+function unload() {
   document.body.innerHTML = '';
 }
+
+export default { load, unload };

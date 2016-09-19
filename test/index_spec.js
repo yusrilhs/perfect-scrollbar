@@ -4,7 +4,7 @@ import $ from './helpers/query-selector';
 import F from './helpers/fixture';
 
 describe('perfect-scrollbar', () => {
-  beforeEach(() => F.load('index_spec'));
+  beforeEach(() => F.load('index'));
   afterEach(() => F.unload());
 
   it('parameters', () => {

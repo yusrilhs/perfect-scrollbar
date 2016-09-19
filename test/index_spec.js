@@ -1,10 +1,10 @@
-import ps from 'ps';
-import Instance from 'ps/instance';
+import ps from 'perfect-scrollbar';
+import Instance from 'perfect-scrollbar/instance';
 import $ from './helpers/query-selector';
 import F from './helpers/fixture';
 
-describe('ps', () => {
-  beforeEach(() => F.load('ps_spec'));
+describe('perfect-scrollbar', () => {
+  beforeEach(() => F.load('index_spec'));
   afterEach(() => F.unload());
 
   it('parameters', () => {

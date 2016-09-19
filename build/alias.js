@@ -2,6 +2,6 @@
 const path = require('path');
 
 module.exports = {
-  'ps': path.resolve(__dirname, '../src/'),
-  'ps/instance': path.resolve(__dirname, '../src/instance'),
+  'perfect-scrollbar': path.resolve(__dirname, '../src/'),
+  'perfect-scrollbar/instance': path.resolve(__dirname, '../src/instance'),
 };

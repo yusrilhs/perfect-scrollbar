@@ -1,2 +1,22 @@
-<div id='container'></div>
+<style>
+  #container {
+    width: 100px;
+    height: 100px;
+    overflow: hidden; /* no scrollbar width or height */
+  }
+  #container.modifier {
+    width: 400px;
+  }
+  #content {
+    width: 200px;
+    height: 400px;
+  }
+  #content.modifier {
+    width: 200px;
+    height: 400px;
+  }
+</style>
+<div id='container'>
+  <div id='content'></div>
+</div>
 <div id='mount'></div>

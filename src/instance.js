@@ -6,6 +6,7 @@ export default class Instance {
     this.opts = opts;
 
     this.appendScrollbars();
+    this.installMutationObserver();
 
     // initialize properties and flags
     this.dirty = false;
@@ -19,6 +20,16 @@ export default class Instance {
     this.els.trackY = appendElement(this.opts.mount, 'div', 'ps-track-y');
     this.els.thumbX = appendElement(this.els.trackX, 'div', 'ps-thumb-x');
     this.els.thumbY = appendElement(this.els.trackY, 'div', 'ps-thumb-y');
+  }
+
+  installMutationObserver() {
+    this.mutObserver = new MutationObserver(() => this.update());
+    this.mutObserver.observe(this.container, {
+      childList: true,
+      attributes: true,
+      characterData: true,
+      subtree: true,
+    });
   }
 
   update() {

@@ -48,9 +48,9 @@ export default class Instance {
   }
 
   update() {
-    // FIXME: calculate scrollbar geometries
-
-    // flag `dirty` true
+    // 'update' doesn't actually update geometry.
+    // it just changes a flag `dirty` to true, which causes each frame loop
+    // to update the real geometries later.
     this.dirty = true;
   }
 }

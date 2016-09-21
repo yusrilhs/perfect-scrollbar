@@ -7,6 +7,7 @@ export default class Instance {
       opts: {},
       els: {},
       mutObserver: null,
+      scrollHandler: null,
       dirty: false,
     };
   }
@@ -19,6 +20,7 @@ export default class Instance {
 
     this.appendScrollbars();
     this.installMutationObserver();
+    this.installScrollHandler();
 
     this.update();
   }
@@ -38,6 +40,11 @@ export default class Instance {
       characterData: true,
       subtree: true,
     });
+  }
+
+  installScrollHandler() {
+    this.scrollHandler = () => this.update();
+    this.container.addEventListener('scroll', this.scrollHandler);
   }
 
   update() {

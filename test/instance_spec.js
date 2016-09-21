@@ -27,49 +27,60 @@ describe('instance', () => {
     });
   });
 
-  describe('observer', () => {
-    const observeTest = changes => done => {
-      const container = $('#container');
-      const instance = ps(container, { mount: '#mount', emulators: [] });
-      spyOn(instance, 'update');
-      expect(instance.update).not.toHaveBeenCalled();
+  const updateTest = changes => done => {
+    const container = $('#container');
+    const instance = ps(container, { mount: '#mount', emulators: [] });
+    spyOn(instance, 'update');
+    expect(instance.update).not.toHaveBeenCalled();
 
-      (function asyncIterate(fns, i) {
-        const fn = fns[i];
-        if (!fn) {
-          return;
-        }
-        fn(container);
-        setTimeout(() => asyncIterate(fns, i + 1), FRAME);
-      }(changes.concat(() => {
-        expect(instance.update.calls.count()).toEqual(changes.length);
-        done();
-      }), 0));
-    };
+    (function asyncIterate(fns, i) {
+      const fn = fns[i];
+      if (!fn) {
+        return;
+      }
+      fn(container);
+      setTimeout(() => asyncIterate(fns, i + 1), FRAME);
+    }(changes.concat(() => {
+      expect(instance.update.calls.count()).toEqual(changes.length);
+      done();
+    }), 0));
+  };
 
-    it('update when the container style changes', observeTest([
+  describe('mutation observer', () => {
+    it('update when the container style changes', updateTest([
       container => { container.style.width = '200px'; },
     ]));
 
-    it('update when the container class changes', observeTest([
+    it('update when the container class changes', updateTest([
       container => { container.className = 'modifier'; },
     ]));
 
-    it('update when a child is appended', observeTest([
+    it('update when a child is appended', updateTest([
       container => container.appendChild(document.createElement('div')),
     ]));
 
-    it('update when the content style changes', observeTest([
+    it('update when the content style changes', updateTest([
       () => { $('#content').className = 'modifier'; },
     ]));
 
-    it('update when the content geometry changes', observeTest([
+    it('update when the content geometry changes', updateTest([
       () => { $('#content').className = 'modifier'; },
     ]));
 
-    it('update several times', observeTest([
+    it('update several times', updateTest([
       container => { container.style.width = '200px'; },
       container => container.appendChild(document.createElement('div')),
+    ]));
+  });
+
+  describe('scroll handler', () => {
+    it('update when the container scrolls', updateTest([
+      container => { container.scrollTop = 100; },
+    ]));
+
+    it('update multiple times', updateTest([
+      container => { container.scrollTop = 100; },
+      container => { container.scrollTop = 20; },
     ]));
   });
 });

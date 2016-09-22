@@ -32,14 +32,14 @@ describe('instance', () => {
     spyOn(instance, 'update');
     expect(instance.update).not.toHaveBeenCalled();
 
-    (function asyncIterate(fns, i) {
+    (async function asyncIterate(fns, i) {
       const fn = fns[i];
       if (!fn) {
         return;
       }
       fn(container);
-      nextFrame()
-      .then(() => asyncIterate(fns, i + 1));
+      await nextFrame();
+      asyncIterate(fns, i + 1);
     }(changes.concat(() => {
       expect(instance.update.calls.count()).toEqual(changes.length);
       done();
@@ -85,25 +85,19 @@ describe('instance', () => {
   });
 
   describe('render loop', () => {
-    it('calls render on update', done => {
+    it('calls render on update', async done => {
       const instance = ps('#container', { mount: '#mount', emulators: [] });
       spyOn(instance, 'render');
-      nextFrame()
-      .then(() => {
-        // update is called on initialisation, and then render
-        expect(instance.render.calls.count()).toEqual(1);
-      })
-      .then(() => nextFrame())
-      .then(() => {
-        // render is not called
-        expect(instance.render.calls.count()).toEqual(1);
-        instance.update();
-      })
-      .then(() => nextFrame())
-      .then(() => {
-        expect(instance.render.calls.count()).toEqual(2);
-        done();
-      });
+      await nextFrame();
+      // update is called on initialisation, and then render
+      expect(instance.render.calls.count()).toEqual(1);
+      await nextFrame();
+      // render is not called
+      expect(instance.render.calls.count()).toEqual(1);
+      instance.update();
+      await nextFrame();
+      expect(instance.render.calls.count()).toEqual(2);
+      done();
     });
   });
 });

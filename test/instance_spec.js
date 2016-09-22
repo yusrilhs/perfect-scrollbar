@@ -3,8 +3,7 @@ import ps from 'perfect-scrollbar';
 import Instance from 'perfect-scrollbar/instance';
 import $ from './helpers/query-selector';
 import F from './helpers/fixture';
-
-const FRAME = 20; // 20ms is enough duration for a frame
+import { nextFrame } from './helpers/timing';
 
 describe('instance', () => {
   beforeEach(() => F.load('instance'));
@@ -39,7 +38,8 @@ describe('instance', () => {
         return;
       }
       fn(container);
-      setTimeout(() => asyncIterate(fns, i + 1), FRAME);
+      nextFrame()
+      .then(() => asyncIterate(fns, i + 1));
     }(changes.concat(() => {
       expect(instance.update.calls.count()).toEqual(changes.length);
       done();

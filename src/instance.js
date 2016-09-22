@@ -8,6 +8,7 @@ export default class Instance {
       els: {},
       mutObserver: null,
       scrollHandler: null,
+      renderLoop: null,
       dirty: false,
     };
   }
@@ -21,6 +22,7 @@ export default class Instance {
     this.appendScrollbars();
     this.installMutationObserver();
     this.installScrollHandler();
+    this.installRenderLoop();
 
     this.update();
   }
@@ -47,10 +49,28 @@ export default class Instance {
     this.container.addEventListener('scroll', this.scrollHandler);
   }
 
+  installRenderLoop() {
+    this.renderLoop = () => {
+      if (this.dirty) {
+        this.render();
+      }
+      // reset dirty to false
+      this.dirty = false;
+      if (this.renderLoop) {
+        requestAnimationFrame(this.renderLoop);
+      }
+    };
+    requestAnimationFrame(this.renderLoop);
+  }
+
   update() {
     // 'update' doesn't actually update geometry.
     // it just changes a flag `dirty` to true, which causes each frame loop
     // to update the real geometries later.
     this.dirty = true;
+  }
+
+  render() {
+    // FIXME: calculate geometry and apply
   }
 }

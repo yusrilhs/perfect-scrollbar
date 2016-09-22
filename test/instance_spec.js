@@ -83,4 +83,27 @@ describe('instance', () => {
       container => { container.scrollTop = 20; },
     ]));
   });
+
+  describe('render loop', () => {
+    it('calls render on update', done => {
+      const instance = ps('#container', { mount: '#mount', emulators: [] });
+      spyOn(instance, 'render');
+      nextFrame()
+      .then(() => {
+        // update is called on initialisation, and then render
+        expect(instance.render.calls.count()).toEqual(1);
+      })
+      .then(() => nextFrame())
+      .then(() => {
+        // render is not called
+        expect(instance.render.calls.count()).toEqual(1);
+        instance.update();
+      })
+      .then(() => nextFrame())
+      .then(() => {
+        expect(instance.render.calls.count()).toEqual(2);
+        done();
+      });
+    });
+  });
 });

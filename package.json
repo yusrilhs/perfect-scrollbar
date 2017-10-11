@@ -1,64 +1,49 @@
 {
   "name": "perfect-scrollbar",
-  "version": "0.8.0",
+  "version": "1.0.3",
   "description": "Minimalistic but perfect custom scrollbar plugin",
   "author": "Hyunje Jun <me@noraesae.net>",
-  "contributors": [
-    {
-      "name": "Hyunje Jun",
-      "email": "me@noraesae.net"
-    }
-  ],
-  "main": "./index.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/noraesae/perfect-scrollbar"
-  },
-  "bugs": {
-    "url": "https://github.com/noraesae/perfect-scrollbar/issues"
-  },
   "keywords": [
-    "jquery-plugin",
     "frontend",
     "scroll",
     "scrollbar"
   ],
-  "engines": {
-    "node": ">= 0.12.0"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/utatti/perfect-scrollbar"
   },
-  "files": [
-    "dist",
-    "src",
-    "index.js",
-    "jquery.js",
-    "perfect-scrollbar.d.ts"
-  ],
-  "devDependencies": {
-    "browserify": "^11.2.0",
-    "del": "^2.0.2",
-    "event-stream": "^3.3.1",
-    "gulp": "^3.9.0",
-    "gulp-autoprefixer": "^3.1.0",
-    "gulp-connect": "^2.2.0",
-    "gulp-eslint": "^1.0.0",
-    "gulp-insert": "^0.5.0",
-    "gulp-rename": "^1.2.2",
-    "gulp-sass": "^2.0.4",
-    "gulp-uglify": "^1.4.1",
-    "gulp-zip": "^3.0.2",
-    "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.1.0"
+  "bugs": {
+    "url": "https://github.com/utatti/perfect-scrollbar/issues"
   },
   "jspm": {
-    "main": "./index.js",
+    "main": "dist/perfect-scrollbar.common.js",
     "registry": "jspm"
   },
-  "typings": "perfect-scrollbar.d.ts",
-  "scripts": {
-    "test": "gulp",
-    "before-deploy": "gulp && gulp compress",
-    "release": "rm -rf dist && gulp && npm publish"
+  "main": "dist/perfect-scrollbar.common.js",
+  "module": "dist/perfect-scrollbar.esm.js",
+  "typings": "types/perfect-scrollbar.d.ts",
+  "style": "css/perfect-scrollbar.css",
+  "files": [
+    "css",
+    "dist",
+    "src",
+    "types"
+  ],
+  "devDependencies": {
+    "chokidar-cli": "^1.2.0",
+    "prettier": "^1.7.0",
+    "rollup": "^0.50.0",
+    "rollup-plugin-buble": "^0.16.0",
+    "uglify-js": "^3.1.2"
   },
-  "style": "./dist/css/perfect-scrollbar.min.css",
+  "scripts": {
+    "test": "npm run format:lint && npm run build",
+    "build": "npm run clean && node build",
+    "clean": "rm -rf dist",
+    "watch": "npm run build && SHELL=/bin/bash chokidar 'src/**/*.js' -c 'npm run format && npm run build'",
+    "format": "prettier --write --single-quote --trailing-comma es5 'src/**/*.js'",
+    "format:lint": "prettier -l --single-quote --trailing-comma es5 'src/**/*.js'",
+    "release": "./release"
+  },
   "license": "MIT"
 }
